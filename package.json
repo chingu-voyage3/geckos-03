@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/chingu-voyage3/geckos-03/issues"
   },
-  "homepage": "https://github.com/chingu-voyage3/geckos-03#readme"
+  "homepage": "https://github.com/chingu-voyage3/geckos-03#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  }
 }
