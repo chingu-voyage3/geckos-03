@@ -23,8 +23,6 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 
-var lastEvent; 
-
 function draw(line){
 
     // Stop drawing if not clicking mouse down
@@ -45,28 +43,23 @@ function draw(line){
     socket.emit('user draw', line);
 }
 
+canvas.addEventListener('mousemove', event=>{
+
+    /*
+     * Added so the line's parameters can easily be passed
+     * by socket.emit;
+     */
+    let line = {startX: lastX, startY: lastY, 
+            endX: event.offsetX, endY: event.offsetY, color: ctx.strokeStyle,
+            size: ctx.lineWidth}
+
+    draw(line);
+
+});
+
 canvas.addEventListener('mousedown', (event) => {
-
     isDrawing = true;
-    lastEvent = event;
-
-    canvas.addEventListener('mousemove', event=>{
-
-        /*
-         * Added so the line's parameters can easily be passed
-         * by socket.emit;
-         */
-        let line = {startX: lastEvent.offsetX, startY: lastEvent.offsetY, 
-                endX: event.offsetX, endY: event.offsetY, color: ctx.strokeStyle,
-                size: ctx.lineWidth}
-
-        draw(line);
-        socket.emit('user draw', line);
-
-        lastEvent = event;    
-
-    });
- 
+    [lastX, lastY] = [event.offsetX, event.offsetY];
 });
 
 canvas.addEventListener('mouseup', () => isDrawing = false);
