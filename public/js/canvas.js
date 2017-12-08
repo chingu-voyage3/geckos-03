@@ -4,7 +4,8 @@
  * The socket.io script in the html file exposes
  * our client side instance of socket via the io()
  * variable
- */
+*/
+
 var socket = io();
 
 const canvas = document.querySelector('#draw');
@@ -23,10 +24,26 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 
-function draw(line){
+function draw(event, line){
 
     // Stop drawing if not clicking mouse down
     if (!isDrawing) return;
+
+    ctx.beginPath();
+
+    // Start line from
+    ctx.moveTo(lastX, lastY);
+
+    // End line
+    ctx.lineTo(event.offsetX, event.offsetY);
+    ctx.stroke();
+
+    socket.emit('user draw', line);
+    [lastX, lastY] = [event.offsetX, event.offsetY];
+
+}
+
+function socketDraw(line){
 
     ctx.beginPath();
 
@@ -36,41 +53,42 @@ function draw(line){
     // End line
     ctx.lineTo(line.endX, line.endY);
     ctx.stroke();
-    [lastX, lastY] = [event.offsetX, event.offsetY];
 
-
-    //
-    socket.emit('user draw', line);
 }
 
-canvas.addEventListener('mousemove', event=>{
+canvas.addEventListener('mousemove', (event) => {
 
-    /*
-     * Added so the line's parameters can easily be passed
-     * by socket.emit;
-     */
-    let line = {startX: lastX, startY: lastY, 
-            endX: event.offsetX, endY: event.offsetY, color: ctx.strokeStyle,
-            size: ctx.lineWidth}
+    let line = {
+        startX: lastX,
+        startY: lastY,
+        endX: event.offsetX,
+        endY: event.offsetY
+    };
 
-    draw(line);
-
+    draw(event, line);
 });
 
 canvas.addEventListener('mousedown', (event) => {
     isDrawing = true;
     [lastX, lastY] = [event.offsetX, event.offsetY];
+
+    let line = {
+        startX: lastX,
+        startY: lastY,
+        endX: event.offsetX,
+        endY: event.offsetY
+    };
+
+    draw(event, line);
 });
 
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
-
 
 /*
  * socket.io part
  */
 
  socket.on('user draw', line => {
-    console.log('Yo')
-    draw(line);
+    socketDraw(line);
  });
