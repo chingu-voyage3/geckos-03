@@ -1,45 +1,49 @@
-'use strict';
+//Initialize express
+var express = require('express');
+var app = express();
 
-const canvas = document.querySelector('#draw');
-const ctx = canvas.getContext('2d');
+//Initialize a new http server
+var http = require('http').Server(app);
 
-// if we want to make the canvas full screen in the future
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
+//Initialize socket.io passing the server as
+//a parameter
+var io = require('socket.io')(http);
 
-ctx.strokeStyle = '#000000';
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.lineWidth = 10;
+/*
+ * express part
+ */
 
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-
-function draw(event){
-
-	// Stop drawing if not clicking mouse down
-	if (!isDrawing) return;
-
-	// console.log(event);
-	ctx.beginPath();
-
-	// Start line from
-	ctx.moveTo(lastX, lastY);
-
-	// End line
-	ctx.lineTo(event.offsetX, event.offsetY);
-	ctx.stroke();
-	[lastX, lastY] = [event.offsetX, event.offsetY];
-
-}
-
-canvas.addEventListener('mousemove', draw);
-
-canvas.addEventListener('mousedown', (event) => {
-	isDrawing = true;
-	[lastX, lastY] = [event.offsetX, event.offsetY];
+//Serve index.html
+app.get('/', (req, res) =>{
+    res.sendFile(__dirname + '/index.html');
 });
 
-canvas.addEventListener('mouseup', () => isDrawing = false);
-canvas.addEventListener('mouseout', () => isDrawing = false);
+//Set the route for static elements (css, jquerey)
+app.use(express.static('public')); 
+
+
+/*
+ * socket.io part
+ */
+io.on('connection', socket =>{
+    console.log('A user connected');
+
+    //Additional event handlers go here
+    socket.on('user draw', line =>{
+        socket.broadcast.emit('user draw', line);
+    })
+
+})
+
+
+io.on('disconnection', socket =>{
+    console.log('A user disconnected');
+})
+
+/*
+ * 
+ */
+http.listen(process.env.PORT || 3000, function(){
+    console.log('listening');
+})
+
