@@ -9,10 +9,19 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <!--A placeholder form for entering usernames -->
+    <div class='user'>
+        <input type='text' id='user-name-field' value='Unknown Artist'>
+        <button onclick='setUsername()'>Submit</button>
+    </div>
+
 	<canvas id="draw" width="600" height="600"></canvas>
 
+
+
 <!--Load socket.io-->
-<!--Socket needs to be loaded aboe canvas -->
+<!--Socket needs to be loaded above canvas -->
 <script src="/socket.io/socket.io.js"></script>
 
 <script src="js/canvas.js"></script>

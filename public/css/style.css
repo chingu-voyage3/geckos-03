@@ -12,3 +12,8 @@ canvas {
 	background-color: #FFFFFF;
 	border: 3px dashed #EC8B3C;
 }
+
+.user {
+    text-align: center;
+    margin: 5%;
+}

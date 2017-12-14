@@ -85,6 +85,23 @@ canvas.addEventListener('mousedown', (event) => {
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
 
+function setUsername(){
+
+    let name = document.querySelector('#user-name-field').value;
+
+    socket.emit('name set', name);
+}
+
+
+/*
+ * DOM Updating Part
+ */
+ function refreshUserList(list){
+    console.log('Active users: ' + list);
+
+    //Update the user list HTML here
+ }
+
 /*
  * socket.io part
  */
@@ -92,3 +109,8 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
  socket.on('user draw', line => {
     socketDraw(line);
  });
+
+
+ socket.on('update users', userList =>{
+    refreshUserList(userList);
+ })
