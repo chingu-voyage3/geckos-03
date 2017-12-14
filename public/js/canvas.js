@@ -92,6 +92,9 @@ function setUsername(){
     socket.emit('name set', name);
 }
 
+const setUserNameButton = document.querySelector('#set-user-name');
+
+setUserNameButton.addEventListener('click', setUsername);
 
 /*
  * DOM Updating Part
