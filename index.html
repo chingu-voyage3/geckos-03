@@ -9,20 +9,27 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<div id="main-container">
+		<div id="main-heading">
+			<h1>Draw with Me</h1>
+		</div>
 		<!--A placeholder form for entering usernames -->
 		<div class="user">
 			<label id="user-name-label" for="user-name-field">Enter a Username</label>
 			<input type="text" id="user-name-field" value="Unknown Artist">
 			<button id="set-user-name">Submit</button>
 		</div>
+		<div id="canvas-container">
+			<canvas id="draw" width="600" height="600"></canvas>
+		</div><div id="right-column">
 			<div id="artists">
 				<h3>Active Artists</h3>
 				<div id="current-users">
 
-
-	<canvas id="draw" width="600" height="600"></canvas>
-
 				</div>
+			</div>
+		</div>
+	</div>
 
 
 <!--Load socket.io-->
