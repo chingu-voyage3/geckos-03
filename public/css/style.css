@@ -64,9 +64,27 @@ canvas {
 	border: 3px dashed #EC8B3C;
 }
 
+#artists h3,
+#chat-room h3 {
+	text-decoration: underline;
 }
+
 .artist-name {
 	color: #EC8B3C;
 	font-weight: bold;
 }
 
+#chat-room {
+	border-top: 3px solid #EC8B3C;
+}
+
+#chat-input {
+	width: 80%;
+}
+
+#send-chat {
+	background-color: #EC8B3C;
+	color: #FFFFFF;
+	border-color: #FFFFFF;
+	width: 20%;
+}
