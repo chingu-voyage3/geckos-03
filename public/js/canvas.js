@@ -99,11 +99,18 @@ setUserNameButton.addEventListener('click', setUsername);
 /*
  * DOM Updating Part
  */
- function refreshUserList(list){
-    console.log('Active users: ' + list);
+function refreshUserList(list){
+	console.log('Active users: ' + list);
 
-    //Update the user list HTML here
- }
+	//Update the user list HTML here
+	const currentUsers = document.querySelector('#current-users');
+	currentUsers.innerHTML = currentUsersHTML(list);
+
+}
+
+function currentUsersHTML(users) {
+	return [...users].map(user => `<p class="artist-name">${user}</p>`).join('');
+}
 
 /*
  * socket.io part

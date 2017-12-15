@@ -17,3 +17,8 @@ canvas {
     text-align: center;
     margin: 5%;
 }
+.artist-name {
+	color: #EC8B3C;
+	font-weight: bold;
+}
+
