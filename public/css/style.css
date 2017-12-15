@@ -6,6 +6,25 @@ body {
 	background-color: #57B2EA;
 }
 
+.user {
+    text-align: center;
+    margin: 2% 0;
+}
+
+#set-user-name {
+	background-color: #EC8B3C;
+	color: #FFFFFF;
+	border-color: #FFFFFF;
+}
+
+#set-user-name:hover {
+	cursor: pointer;
+}
+
+#user-name-label {
+	text-transform: uppercase;
+	font-weight: bold;
+}
 canvas {
 	display: block;
 	margin: 12.5% auto;
