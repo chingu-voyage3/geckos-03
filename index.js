@@ -9,6 +9,9 @@ var http = require('http').Server(app);
 //a parameter
 var io = require('socket.io')(http);
 
+//Import our users file
+var users = require('./lib/users.js')
+
 /*
  * express part
  */
@@ -28,16 +31,32 @@ app.use(express.static('public'));
 io.on('connection', socket =>{
     console.log('A user connected');
 
+    let userList = users.addUsername(socket.id, 'Unknown Artist');
+
+    io.sockets.emit('update users', userList);
+
     //Additional event handlers go here
     socket.on('user draw', line =>{
         socket.broadcast.emit('user draw', line);
     })
 
-})
+    socket.on('disconnect', function(){
 
+        userList = users.removeUsername(socket.id);
 
-io.on('disconnection', socket =>{
-    console.log('A user disconnected');
+        io.sockets.emit('update users', userList);
+      });
+
+    socket.on('name set', name =>{
+
+        /*
+        * Not the cleanest way to handle this, but good enough for now
+        */
+        userList = users.removeUsername(socket.id);
+        userList = users.addUsername(socket.id, name);
+        io.sockets.emit('update users', userList);
+    })
+
 })
 
 /*

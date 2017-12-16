@@ -9,10 +9,37 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<canvas id="draw" width="600" height="600"></canvas>
+	<div id="main-container">
+		<div id="main-heading">
+			<h1>Draw with Me</h1>
+		</div>
+		<!--A placeholder form for entering usernames -->
+		<div class="user">
+			<label id="user-name-label" for="user-name-field">Enter a Username</label>
+			<input type="text" id="user-name-field" value="Unknown Artist">
+			<button id="set-user-name">Submit</button>
+		</div>
+		<div id="canvas-container">
+			<canvas id="draw" width="600" height="600"></canvas>
+		</div><div id="right-column">
+			<div id="artists">
+				<h3>Active Artists</h3>
+				<div id="current-users">
+
+				</div>
+			</div>
+			<div id="chat-room">
+				<h3>Chat Room</h3>
+				<div id="send-chat-container">
+					<input id="chat-input" type="text" value="" placeholder="Send a message"><button id="send-chat">Chat</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 <!--Load socket.io-->
-<!--Socket needs to be loaded aboe canvas -->
+<!--Socket needs to be loaded above canvas -->
 <script src="/socket.io/socket.io.js"></script>
 
 <script src="js/canvas.js"></script>
