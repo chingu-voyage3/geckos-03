@@ -88,3 +88,7 @@ canvas {
 	border-color: #FFFFFF;
 	width: 20%;
 }
+
+.chat-message {
+	text-align: left;
+}
