@@ -63,9 +63,13 @@ ul {
 
 canvas {
 	display: block;
-	margin: 12.5% auto;
+	margin: 2.5% auto;
 	background-color: #FFFFFF;
 	border: 3px dashed #EC8B3C;
+}
+
+#canvas-tools {
+	text-align: center;
 }
 
 .brush-color {
