@@ -108,6 +108,9 @@ function sendChat() {
 	let msg = document.querySelector('#chat-input').value;
 
 	socket.emit('message', msg);
+
+	document.querySelector('#chat-input').value = '';
+
 }
 
 /*
