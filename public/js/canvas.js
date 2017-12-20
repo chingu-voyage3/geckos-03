@@ -19,6 +19,11 @@ const ctx = canvas.getContext('2d');
 
 let currentBrushColor = (ctx.strokeStyle = '#000000');
 
+//I think the default is 10
+//I could be wrong
+//-- Michael 
+let currentBrushSize = (ctx.lineWidth = '10');
+
 const brushColors = document.querySelectorAll('.brush-color');
 const colorsList = document.querySelector('.colors-list');
 
@@ -35,6 +40,15 @@ function updateBrushColor(event){
 	// }
 
 	currentBrushColor = (ctx.strokeStyle = event.target.dataset.color);
+
+
+	
+	// Here's my shot at handling the 'selected' classes
+	// I don't know if we should be doing error handling
+	// Or checking if
+	document.getElementsByClassName("selected")[0].classList.remove('selected');//
+	event.target.classList.add('selected');
+
 };
 
 // Open Brush Color Selector
@@ -100,7 +114,7 @@ sizeInput.addEventListener('change', updateBrushSize);
 sizeInput.addEventListener('mousemove', updateBrushSize);
 
 function updateBrushSize(){
-	ctx.lineWidth = this.value;
+	currentBrushSize = (ctx.lineWidth = this.value);
 }
 
 ctx.lineWidth = 10;
@@ -131,26 +145,15 @@ function draw(event, line){
 
 }
 
-function socketDraw(line){
-
-	ctx.beginPath();
-
-	// Start line from
-	ctx.moveTo(line.startX, line.startY);
-
-	// End line
-	ctx.lineTo(line.endX, line.endY);
-	ctx.stroke();
-
-}
-
 canvas.addEventListener('mousemove', (event) => {
 
 	let line = {
 		startX: lastX,
 		startY: lastY,
 		endX: event.offsetX,
-		endY: event.offsetY
+		endY: event.offsetY,
+		color: currentBrushColor,
+		size: ctx.lineWidth
 	};
 
 	draw(event, line);
@@ -165,7 +168,9 @@ canvas.addEventListener('mousedown', (event) => {
 		startX: lastX,
 		startY: lastY,
 		endX: event.offsetX,
-		endY: event.offsetY
+		endY: event.offsetY,
+		color: currentBrushColor,
+		size: ctx.lineWidth
 	};
 
 	draw(event, line);
@@ -212,6 +217,27 @@ chatInput.addEventListener('keydown', function(event){
 /*
  * DOM Updating Part
  */
+function socketDraw(line){
+
+	// Change ctx to parameters from
+	// the other person's brush
+	ctx.strokeStyle = line.color;
+	ctx.lineWidth = line.size;
+
+	ctx.beginPath();
+
+	// Start line from
+	ctx.moveTo(line.startX, line.startY);
+
+	// End line
+	ctx.lineTo(line.endX, line.endY);
+	ctx.stroke();
+
+	//Change ctx back to the user's parameters
+	ctx.strokeStyle = currentBrushColor;
+	ctx.lineWidth = currentBrushSize;
+}
+
 function refreshUserList(list){
 
 	const currentUsers = document.querySelector('#current-users');
