@@ -113,6 +113,14 @@ function sendChat() {
 
 }
 
+const chatInput = document.querySelector('#chat-input')
+
+chatInput.addEventListener('keydown', function(event){
+	if (event.keyCode === 13) {
+		sendChat();
+	}
+});
+
 /*
  * DOM Updating Part
  */
