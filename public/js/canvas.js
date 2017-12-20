@@ -48,6 +48,23 @@ function showColorSelector(){
 
 	createNewColor.classList.toggle('hidden');
 }
+
+// Setting color of '#new-color'
+
+const rangeInputs = document.querySelectorAll(' input[type=range].color-range');
+
+rangeInputs.forEach( rangeInput => addEventListener('input', updateNewBrushColor));
+
+function updateNewBrushColor(){
+
+	let redValue = document.querySelector('#red').value;
+	let greenValue = document.querySelector('#green').value;
+	let blueValue = document.querySelector('#blue').value;
+	const newColorBox = document.querySelector('#new-color');
+
+	newColorBox.style.backgroundColor = ('rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')');
+
+}
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 10;
