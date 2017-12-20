@@ -37,6 +37,17 @@ function updateBrushColor(event){
 	currentBrushColor = (ctx.strokeStyle = event.target.dataset.color);
 };
 
+// Open Brush Color Selector
+
+const showBrushColorSelector = document.querySelector('#show-brush-color-selector');
+
+showBrushColorSelector.addEventListener('click', showColorSelector);
+
+function showColorSelector(){
+	const createNewColor = document.querySelector('#create-new-color');
+
+	createNewColor.classList.toggle('hidden');
+}
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 10;

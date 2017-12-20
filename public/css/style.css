@@ -89,6 +89,39 @@ canvas {
 .white {
 	background-color: #FFFFFF;
 }
+
+#show-brush-color-selector,
+#add-new-brush-color {
+	padding: 2.5%;
+	width: 25%;
+	min-width: 165px;
+	background-color: #83CB91;
+	color: #FFFFFF;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	box-shadow: 1px 1px #78B984;
+}
+
+#add-new-brush-color {
+	width: 100%;
+	min-width: fit-content;
+}
+
+#create-new-color {
+	width: 50%;
+	background-color: #FFFFFF;
+	margin: 0 auto;
+	padding: 2.5%;
+	border-radius: 5px;
+}
+
+#new-color {
+	display: block;
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+}
+
 #artists h3,
 #chat-room h3 {
 	text-decoration: underline;
@@ -112,4 +145,10 @@ canvas {
 	color: #FFFFFF;
 	border-color: #FFFFFF;
 	width: 20%;
+}
+
+/* Helper Classes */
+
+.hidden {
+	display: none;
 }
