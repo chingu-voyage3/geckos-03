@@ -65,6 +65,31 @@ function updateNewBrushColor(){
 	newColorBox.style.backgroundColor = ('rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')');
 
 }
+
+// Add New Brush Color
+// TODO: Pass new brush color through Socket
+
+const addNewBrushColor = document.querySelector('#add-new-brush-color');
+
+addNewBrushColor.addEventListener('click', buildNewBrushColor);
+
+function buildNewBrushColor(){
+
+	const newColorBox = document.querySelector('#new-color');
+	const currentColor = newColorBox.style.backgroundColor;
+	const li = document.createElement('li');
+
+	li.classList.add('brush-color');
+	li.setAttribute('data-color', currentColor);
+	li.style.backgroundColor = currentColor;
+
+	const colorsList = document.querySelector('.colors-list');
+
+	colorsList.appendChild(li);
+
+	ctx.strokeStyle = currentColor;
+
+};
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 10;
