@@ -6,6 +6,10 @@ body {
 	background-color: #57B2EA;
 }
 
+ul {
+	list-style: none;
+}
+
 #main-container {
 	max-width: 1440px;
 	margin: 0 auto;
@@ -64,6 +68,27 @@ canvas {
 	border: 3px dashed #EC8B3C;
 }
 
+.brush-color {
+	display: inline-block;
+	margin-right: 10px;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: 0 3px 0 0 #222;
+}
+
+.selected {
+	border: 5px solid #EC8B3C;
+}
+
+.black {
+	background-color: #000000;
+}
+
+.white {
+	background-color: #FFFFFF;
+}
 #artists h3,
 #chat-room h3 {
 	text-decoration: underline;

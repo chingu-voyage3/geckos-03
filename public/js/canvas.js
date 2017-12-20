@@ -15,7 +15,28 @@ const ctx = canvas.getContext('2d');
 // canvas.width = window.innerWidth;
 // canvas.height = window.innerHeight;
 
-ctx.strokeStyle = '#000000';
+// Brush Color
+
+let currentBrushColor = (ctx.strokeStyle = '#000000');
+
+const brushColors = document.querySelectorAll('.brush-color');
+const colorsList = document.querySelector('.colors-list');
+
+colorsList.addEventListener('click', updateBrushColor);
+
+function updateBrushColor(event){
+
+	// TODO: Fix addition / removal of selected class on active brush
+
+	// console.log(event)
+	// brushColors.forEach(brushColor => brushColor.classList.remove('selected'));
+	// if (event.target.classList){
+	// 	event.target.classList.add('selected');
+	// }
+
+	currentBrushColor = (ctx.strokeStyle = event.target.dataset.color);
+};
+
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 10;
