@@ -90,9 +90,23 @@ function buildNewBrushColor(){
 	ctx.strokeStyle = currentColor;
 
 };
+
+// Brush Size
+// TODO: Pass brush size to socket
+
+const sizeInput = document.querySelector(' input[type=range].size-range');
+
+sizeInput.addEventListener('change', updateBrushSize);
+sizeInput.addEventListener('mousemove', updateBrushSize);
+
+function updateBrushSize(){
+	ctx.lineWidth = this.value;
+}
+
+ctx.lineWidth = 10;
+
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-ctx.lineWidth = 10;
 
 let isDrawing = false;
 let lastX = 0;
