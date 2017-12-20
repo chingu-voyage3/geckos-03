@@ -174,6 +174,15 @@ canvas.addEventListener('mousedown', (event) => {
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
 
+/*
+ * User events part 
+ */
+const setUserNameButton = document.querySelector('#set-user-name');
+const sendChatButton = document.querySelector('#send-chat');
+
+setUserNameButton.addEventListener('click', setUsername);
+sendChatButton.addEventListener('click', sendChat);
+
 function setUsername(){
 
 	let name = document.querySelector('#user-name-field').value;
@@ -182,30 +191,48 @@ function setUsername(){
 
 }
 
-const setUserNameButton = document.querySelector('#set-user-name');
+function sendChat() {
 
-setUserNameButton.addEventListener('click', setUsername);
+	let msg = document.querySelector('#chat-input').value;
+
+	socket.emit('message', msg);
+
+	document.querySelector('#chat-input').value = '';
+
+}
+
+const chatInput = document.querySelector('#chat-input')
+
+chatInput.addEventListener('keydown', function(event){
+	if (event.keyCode === 13) {
+		sendChat();
+	}
+});
 
 /*
-	* DOM Updating Part
-*/
+ * DOM Updating Part
+ */
 function refreshUserList(list){
-	console.log('Active users: ' + list);
 
-	//Update the user list HTML here
 	const currentUsers = document.querySelector('#current-users');
 	currentUsers.innerHTML = currentUsersHTML(list);
-
 }
 
-function currentUsersHTML(users) {
-	return [...users].map(user => `<p class="artist-name">${user}</p>`).join('');
+function appendMessage(msg, name) {
+
+	const MAX_MESSAGES = 13;
+	const chat = document.querySelector('#chat-area');
+
+	if(chat.childElementCount >= MAX_MESSAGES){
+		chat.removeChild(chat.firstElementChild);
+	}
+
+	chat.innerHTML += chatHTML(msg, name);
 }
 
 /*
-	* socket.io part
-*/
-
+ * socket.io part
+ */
 socket.on('user draw', line => {
 	socketDraw(line);
 });
@@ -214,3 +241,18 @@ socket.on('user draw', line => {
 socket.on('update users', userList =>{
 	refreshUserList(userList);
 })
+
+socket.on('msg', (msg, name) => {
+	appendMessage(msg, name);
+})
+
+/*
+ * HTML parsing part
+ */
+function currentUsersHTML(users) {
+	return [...users].map(user => `<p class="artist-name">${user}</p>`).join('');
+}
+
+function chatHTML(msg, name) {
+	return '<p class="chat-message">' + name + ': ' + msg + '</p>'
+}

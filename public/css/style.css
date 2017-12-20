@@ -156,3 +156,7 @@ canvas {
 .hidden {
 	display: none;
 }
+.chat-message {
+	text-align: left;
+
+}

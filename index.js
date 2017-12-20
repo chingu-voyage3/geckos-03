@@ -57,6 +57,10 @@ io.on('connection', socket =>{
         io.sockets.emit('update users', userList);
     })
 
+    socket.on('message', msg=>{
+        io.local.emit('msg', msg, users.getUsername(socket.id))
+    })
+
 })
 
 /*
