@@ -15,13 +15,8 @@ const ctx = canvas.getContext('2d');
 // canvas.width = window.innerWidth;
 // canvas.height = window.innerHeight;
 
-// Brush Color
-
+// Brush Color and Size
 let currentBrushColor = (ctx.strokeStyle = '#000000');
-
-//I think the default is 10
-//I could be wrong
-//-- Michael 
 let currentBrushSize = (ctx.lineWidth = '10');
 
 const brushColors = document.querySelectorAll('.brush-color');
@@ -38,14 +33,9 @@ function updateBrushColor(event){
 	// if (event.target.classList){
 	// 	event.target.classList.add('selected');
 	// }
-
 	currentBrushColor = (ctx.strokeStyle = event.target.dataset.color);
 
-
-	
 	// Here's my shot at handling the 'selected' classes
-	// I don't know if we should be doing error handling
-	// Or checking if
 	document.getElementsByClassName("selected")[0].classList.remove('selected');//
 	event.target.classList.add('selected');
 
@@ -190,6 +180,7 @@ sendChatButton.addEventListener('click', sendChat);
 
 function setUsername(){
 
+	//Input should come from popup
 	let name = document.querySelector('#user-name-field').value;
 
 	socket.emit('name set', name);
