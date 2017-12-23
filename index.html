@@ -5,36 +5,52 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title></title>
-	<link rel="stylesheet" href="css/normalize.css">
+	<!-- <link rel="stylesheet" href="css/normalize.css"> -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+	<div class="cover"></div>
+
 	<div id="main-container">
-		<div id="main-heading">
-			<h1>Draw with Me</h1>
+		<div id="app-container">
+			<div id="canvas-container">
+				<div id="canvas-overflow">
+					<canvas id="draw" width="700" height="600"></canvas>
+				</div>
+				<div id="toolbar">
+					<button>Example</button>
+					<button id="toggle-scroll"><i class="fa fa-lock" aria-hidden="true"></i></button>
+				</div>
+			</div>
+			<div id="sidebar">
+				<div id="artists">
+					<div class="section-title">
+						<h2>Currently Online</h3>
+					</div>
+					<div id="current-users">
+	
+					</div>
+				</div>
+				<div id="chat-room">
+					<div class="section-title">
+						<h2>Chat Room</h3>
+					</div>
+					<div id="chat-area"></div>
+					<div id="send-chat-container">
+						<input id="chat-input" type="text" value="" placeholder="Send a message">
+						<button id="send-chat">Chat</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!--A placeholder form for entering usernames -->
+	</div>
+
+	<div id="sign-in">
 		<div class="user">
 			<label id="user-name-label" for="user-name-field">Enter a Username</label>
 			<input type="text" id="user-name-field" value="Unknown Artist">
 			<button id="set-user-name">Submit</button>
-		</div>
-		<div id="canvas-container">
-			<canvas id="draw" width="600" height="600"></canvas>
-		</div><div id="right-column">
-			<div id="artists">
-				<h3>Active Artists</h3>
-				<div id="current-users">
-
-				</div>
-			</div>
-			<div id="chat-room">
-				<h3>Chat Room</h3>
-				<div id="chat-area"></div>
-				<div id="send-chat-container">
-					<input id="chat-input" type="text" value="" placeholder="Send a message"><button id="send-chat">Chat</button>
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -43,7 +59,7 @@
 <!--Socket needs to be loaded above canvas -->
 <script src="/socket.io/socket.io.js"></script>
 
-<script src="js/canvas.js"></script>
+<script src="js/canvas.js"></script> 
 
 </body>
 </html>
