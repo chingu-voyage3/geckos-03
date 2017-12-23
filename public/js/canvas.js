@@ -174,15 +174,21 @@ canvas.addEventListener('mouseout', () => isDrawing = false);
  */
 const setUserNameButton = document.querySelector('#set-user-name');
 const sendChatButton = document.querySelector('#send-chat');
+const toggleOverflowButton = document.querySelector('#toggle-scroll');
 
 setUserNameButton.addEventListener('click', setUsername);
 sendChatButton.addEventListener('click', sendChat);
+toggleOverflowButton.addEventListener('click', toggleOverflow);
 
 function setUsername(){
 
 	//Input should come from popup
 	let name = document.querySelector('#user-name-field').value;
 
+	// // Responsible for removing the registration.
+	document.querySelector("#sign-in").classList.toggle("signed-in");
+	document.querySelector(".cover").classList.toggle("cover");
+	console.log("SasdSFF");
 	socket.emit('name set', name);
 
 }
@@ -195,6 +201,17 @@ function sendChat() {
 
 	document.querySelector('#chat-input').value = '';
 
+}
+
+//For mobile devices. If the screen is too small the canvas will scroll and not draw.
+//This is so that the canvas locks and mobile users can draw.
+//Still does not work on mobile devices but this can be solved with third party libraries
+function toggleOverflow() {
+	//Stop Canvas from scrolling
+	document.querySelector('#canvas-overflow').classList.toggle("scroll-lock");
+
+	//Stop document from scrolling.
+	document.querySelector('html').classList.toggle("scroll-lock");
 }
 
 const chatInput = document.querySelector('#chat-input')
@@ -240,8 +257,9 @@ function appendMessage(msg, name) {
 	const MAX_MESSAGES = 13;
 	const chat = document.querySelector('#chat-area');
 
+	//Removed Limit because the chat does not break once too many messages are sent anymore
 	if(chat.childElementCount >= MAX_MESSAGES){
-		chat.removeChild(chat.firstElementChild);
+		// chat.removeChild(chat.firstElementChild);
 	}
 
 	chat.innerHTML += chatHTML(msg, name);
@@ -271,5 +289,5 @@ function currentUsersHTML(users) {
 }
 
 function chatHTML(msg, name) {
-	return '<p class="chat-message">' + name + ': ' + msg + '</p>'
+	return '<p class="chat-message">' + '<span class="message-author">' + name + ': </span>' + msg + '</p>'
 }
