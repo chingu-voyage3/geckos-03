@@ -35,10 +35,6 @@ body {
 	background-color: rgb(80, 62, 76);
 }
 
-#toolbar button {
-	height: 100%;
-}
-
 #sidebar {
 	flex-basis: 300px;
 	flex-grow: 1;
@@ -65,6 +61,10 @@ body {
 	width: 99%;
 }
 
+#send-chat-container {
+	overflow: hidden;
+}
+
 #send-chat {
 	border-color: #FFFFFF;
 	width: 100%;
@@ -88,57 +88,9 @@ body {
 	border-radius: 5px;
 }
 
-/* Button styling */
-button {
-	background: #ca94e0;
-	background-image: -webkit-linear-gradient(top, #ca94e0, #bd7dbb);
-	background-image: -moz-linear-gradient(top, #ca94e0, #bd7dbb);
-	background-image: -ms-linear-gradient(top, #ca94e0, #bd7dbb);
-	background-image: -o-linear-gradient(top, #ca94e0, #bd7dbb);
-	background-image: linear-gradient(to bottom, #ca94e0, #bd7dbb);
-	color: #ffffff;
-	border: none;
-	padding: 10px 20px 10px 20px;
-	text-decoration: none;
-}
-
-button:hover {
-	background: #be57e6;
-	text-decoration: none;
-}
-
-/* Only showing this if its on mobile. */
-button#toggle-scroll {
-	display: none;
-}
-
 .scroll-lock {
 	height: 100%;
 	overflow: hidden;
-}
-
-
-@media screen and (max-width: 920px) {
-
-	#app-container {
-		flex-direction: column;
-	}
-
-	#canvas-overflow {
-		min-height: 600px;
-	}
-
-	#canvas-container {
-		width: 100%;
-	}
-
-	.sidebar {
-		width: calc(100% - 40);
-	}
-
-	.toolbar button#toggle-scroll {
-		display: inline-block;
-	}
 }
 
 /* Cover screen so to force user to finish signing in. */
@@ -149,6 +101,7 @@ button#toggle-scroll {
 	position: absolute;
 }
 
+/* Signing in stuff */
 #sign-in {
 	width: 500px;
 	height: 300px;
@@ -177,8 +130,182 @@ button#toggle-scroll {
 	display: none;
 }
 
+/* Animations */
 @keyframes fadeIn {
 	100% {
 		opacity: 100;
 	}
 }
+
+
+/* Everything brush related. */
+.brush-color {
+	display: inline-block;
+	margin-right: 10px;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	cursor: pointer;
+	box-shadow: 0 3px 0 0 #222;
+}
+
+.selected {
+	border: 2px solid #EC8B3C;
+}
+
+.black {
+	background-color: #000000;
+}
+
+.white {
+	background-color: #FFFFFF;
+}
+
+.color-list-container {
+	/* margin: 0 auto; */
+	display: inline-block;
+}
+
+.colors-list {
+	height: 51px;
+	overflow: auto;
+}
+
+#create-new-color {
+	width: 400px;
+	background-color: rgb(45, 114, 43);
+	margin: 0 auto;
+	height: 200px;
+	padding: 2.5%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#new-color {
+	display: block;
+	width: 50px;
+	height: 50px;
+	margin: 10px;
+	order: 1;
+} 
+
+/* Popup stuff. */
+/* THIS IS TEMPORARY. WILL BE REPLACED WITH A BETTER SYSTEM THAT USES JAVASCRIPT VERY SOON. */
+/* IN THE MEANTIME MAKE ANY TOOLBAR THINGS OUTSIDE MAIN CONTAINER AND I WILL PUSH IT BACK WITH THE UPDATES. */
+/* THE NEW SYSTEM SHOULD BE IN PLACE SOMETIME AFTER CHRISTMAS */
+.popup{
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    color: #FFF;
+}
+
+/* Click to expand button */
+
+.toolbar-popup{
+    position: absolute;
+    z-index: 1;
+	display: none;
+	bottom: 40px;
+}
+
+/* Button */
+.popup-toggle{
+    display: inline-block;
+    width: 100%;
+	background-color: #ca94e0;
+	position: relative;
+    padding: 10px 20px;
+
+    cursor: pointer;
+    text-align: center;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Active color for popup button when popup is active. */
+input[type=checkbox]:checked ~ .popup-toggle {
+    background-color: #be57e6;
+}
+
+/* If checkbox (popup toggler) is clicked, make popup show */
+input[type=checkbox]:checked ~ .toolbar-popup {
+    display: block;
+}
+
+/* Hide the checkbox */
+input[type=checkbox]{
+    display: none;
+}
+
+
+/* Helper classes */
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.form-row {
+	display: flex;
+}
+
+.form-row input {
+	flex: 1;
+}
+
+.form-row label {
+	flex: 1;
+}
+
+/* Button styling */
+button {
+	background: #ca94e0;
+	background-image: -webkit-linear-gradient(top, #ca94e0, #bd7dbb);
+	background-image: -moz-linear-gradient(top, #ca94e0, #bd7dbb);
+	background-image: -ms-linear-gradient(top, #ca94e0, #bd7dbb);
+	background-image: -o-linear-gradient(top, #ca94e0, #bd7dbb);
+	background-image: linear-gradient(to bottom, #ca94e0, #bd7dbb);
+	color: #ffffff;
+	border: none;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+}
+
+button:hover {
+	background: #be57e6;
+	text-decoration: none;
+}
+
+/* Only showing this if its on mobile. */
+button#toggle-scroll {
+	display: none;
+}
+
+@media screen and (max-width: 920px) {
+	
+		#app-container {
+			flex-direction: column;
+		}
+	
+		#canvas-overflow {
+			min-height: 600px;
+		}
+	
+		#canvas-container {
+			width: 100%;
+		}
+	
+		.sidebar {
+			width: calc(100% - 40);
+		}
+	
+		.toolbar button#toggle-scroll {
+			display: inline-block;
+		}
+	}

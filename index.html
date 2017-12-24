@@ -19,8 +19,46 @@
 					<canvas id="draw" width="700" height="600"></canvas>
 				</div>
 				<div id="toolbar">
-					<button>Example</button>
-					<button id="toggle-scroll"><i class="fa fa-lock" aria-hidden="true"></i></button>
+					<div class="popup">
+						<input type="checkbox" id="checkbox_toggle">
+						<label id="show-brush-color-selector" class="popup-toggle" for="checkbox_toggle">Colors</label>
+						<div class="toolbar-popup">
+							<div id="brush-colors-container">
+								<div id="create-new-color" class="hidden">
+									<div class="color-list-container">
+										<ul class="colors-list">
+											<li class="brush-color black selected" data-color="#000000">
+											</li><li class="brush-color white" data-color="#FFFFFF"></li>
+										</ul>
+									</div>
+									<div class="flex-row">
+										<div class="sliders">
+											<div class="form-row">
+												<label for="red">Red</label>
+												<input id="red" class="color-range" name="red" type="range" min="0" max="255" value="0">
+											</div>
+											<div class="form-row">
+												<label for="green">Green</label>
+												<input id="green" class="color-range" name="green" type="range" min="0" max="255" value="0">
+											</div>
+											<div class="form-row">
+												<label for="blue">Blue</label>
+												<input id="blue" class="color-range" name="blue" type="range" min="0" max="255" value="0">
+											</div>
+											<div class="form-row">
+												<label for="brush-size">Brush Size:</label>
+												<input id="brush-size" class="size-range" type="range" name="brush-size" min="1" max="200" value="10" data-sizing="px">
+											</div>
+										</div>
+										<div class="submit">
+											<span id="new-color" style="background-color: #000000;"></span>
+											<button id="add-new-brush-color">Add New Brush Color</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="sidebar">
@@ -55,8 +93,15 @@
 	</div>
 
 
+	
+
+
 <!--Load socket.io-->
 <!--Socket needs to be loaded above canvas -->
+
+
+
+
 <script src="/socket.io/socket.io.js"></script>
 
 <script src="js/canvas.js"></script> 
