@@ -98,7 +98,7 @@ function buildNewBrushColor(){
 // Brush Size
 // TODO: Pass brush size to socket
 
-const sizeInput = document.querySelector(' input[type=range].size-range');
+const sizeInput = document.querySelector('input[type=range].size-range');
 
 sizeInput.addEventListener('change', updateBrushSize);
 sizeInput.addEventListener('mousemove', updateBrushSize);
@@ -178,13 +178,12 @@ const sendChatButton = document.querySelector('#send-chat');
 setUserNameButton.addEventListener('click', setUsername);
 sendChatButton.addEventListener('click', sendChat);
 
-function setUsername(){
-
-	//Input should come from popup
+function setUsername() {
 	let name = document.querySelector('#user-name-field').value;
 
 	socket.emit('name set', name);
-
+	
+	removeSignIn();
 }
 
 function sendChat() {
@@ -195,6 +194,11 @@ function sendChat() {
 
 	document.querySelector('#chat-input').value = '';
 
+}
+
+function removeSignIn() {
+	document.querySelector("#sign-in").classList.toggle("signed-in");
+	document.querySelector(".cover").classList.toggle("cover");
 }
 
 const chatInput = document.querySelector('#chat-input')
@@ -240,8 +244,9 @@ function appendMessage(msg, name) {
 	const MAX_MESSAGES = 13;
 	const chat = document.querySelector('#chat-area');
 
+	//Removed Limit because the chat does not break once too many messages are sent anymore
 	if(chat.childElementCount >= MAX_MESSAGES){
-		chat.removeChild(chat.firstElementChild);
+		// chat.removeChild(chat.firstElementChild);
 	}
 
 	chat.innerHTML += chatHTML(msg, name);
@@ -281,5 +286,5 @@ function currentUsersHTML(users) {
 }
 
 function chatHTML(msg, name) {
-	return '<p class="chat-message">' + name + ': ' + msg + '</p>'
+	return '<p class="chat-message">' + '<span class="message-author">' + name + ': </span>' + msg + '</p>'
 }

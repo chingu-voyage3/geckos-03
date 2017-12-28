@@ -5,78 +5,106 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title></title>
-	<link rel="stylesheet" href="css/normalize.css">
+	<!-- <link rel="stylesheet" href="css/normalize.css"> -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+	<div class="cover"></div>
+
 	<div id="main-container">
-		<div id="main-heading">
-			<h1>Draw with Me</h1>
-		</div>
-		<!--A placeholder form for entering usernames -->
-		<div class="user">
-			<label id="user-name-label" for="user-name-field">Enter a Username</label>
-			<input type="text" id="user-name-field" value="Unknown Artist">
-			<button id="set-user-name">Submit</button>
-		</div>
-		<div id="canvas-container">
-			<canvas id="draw" width="600" height="600"></canvas>
-			<div id="canvas-tools">
-				<div id="brush-colors-container">
-					<ul class="colors-list">
-						<li class="brush-color black selected" data-color="#000000">
-						</li><li class="brush-color white" data-color="#FFFFFF"></li>
-					</ul>
-					<button id="show-brush-color-selector" type="button">New Brush Color</button>
-					<div id="create-new-color" class="hidden">
-						<span id="new-color" style="background-color: rgb(0, 0, 0);"></span>
-						<div class="sliders">
-							<p>
-								<label for="red">Red</label>
-								<input id="red" class="color-range" name="red" type="range" min="0" max="255" value="0">
-							</p>
-							<p>
-								<label for="green">Green</label>
-								<input id="green" class="color-range" name="green" type="range" min="0" max="255" value="0">
-							</p>
-							<p>
-								<label for="blue">Blue</label>
-								<input id="blue" class="color-range" name="blue" type="range" min="0" max="255" value="0">
-							</p>
-						</div>
-						<div>
-						<button id="add-new-brush-color">Add New Brush Color</button>
+		<div id="app-container">
+			<div id="canvas-container">
+				<div id="canvas-overflow">
+					<canvas id="draw" width="700" height="600"></canvas>
+				</div>
+				<div id="toolbar">
+					<div class="popup">
+						<input type="checkbox" id="checkbox_toggle">
+						<label id="show-brush-color-selector" class="popup-toggle" for="checkbox_toggle">Colors</label>
+						<div class="toolbar-popup">
+							<div id="brush-colors-container">
+								<div id="create-new-color" class="hidden">
+									<div class="color-list-container">
+										<ul class="colors-list">
+											<li class="brush-color black selected" data-color="#000000">
+											</li><li class="brush-color white" data-color="#FFFFFF"></li>
+										</ul>
+									</div>
+									<div class="flex-row">
+										<div class="sliders">
+											<div class="form-row">
+												<label for="red">Red</label>
+												<input id="red" class="color-range" name="red" type="range" min="0" max="255" value="0">
+											</div>
+											<div class="form-row">
+												<label for="green">Green</label>
+												<input id="green" class="color-range" name="green" type="range" min="0" max="255" value="0">
+											</div>
+											<div class="form-row">
+												<label for="blue">Blue</label>
+												<input id="blue" class="color-range" name="blue" type="range" min="0" max="255" value="0">
+											</div>
+											<div class="form-row">
+												<label for="brush-size">Brush Size:</label>
+												<input id="brush-size" class="size-range" type="range" name="brush-size" min="1" max="200" value="10" data-sizing="px">
+											</div>
+										</div>
+										<div class="submit">
+											<span id="new-color" style="background-color: #000000;"></span>
+											<button id="add-new-brush-color">Add New Brush Color</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div id="brush-size-container">
-					<label for="brush-size">Brush Size:</label>
-					<input id="brush-size" class="size-range" type="range" name="brush-size" min="1" max="200" value="10" data-sizing="px">
-				</div>
 			</div>
-		</div><div id="right-column">
-			<div id="artists">
-				<h3>Active Artists</h3>
-				<div id="current-users">
-
+			<div id="sidebar">
+				<div id="artists">
+					<div class="section-title">
+						<h2>Currently Online</h3>
+					</div>
+					<div id="current-users">
+	
+					</div>
 				</div>
-			</div>
-			<div id="chat-room">
-				<h3>Chat Room</h3>
-				<div id="chat-area"></div>
-				<div id="send-chat-container">
-					<input id="chat-input" type="text" value="" placeholder="Send a message"><button id="send-chat">Chat</button>
+				<div id="chat-room">
+					<div class="section-title">
+						<h2>Chat Room</h3>
+					</div>
+					<div id="chat-area"></div>
+					<div id="send-chat-container">
+						<input id="chat-input" type="text" value="" placeholder="Send a message">
+						<button id="send-chat">Chat</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<div id="sign-in">
+		<div class="user">
+			<label id="user-name-label" for="user-name-field">Enter a Username</label>
+			<input type="text" id="user-name-field" value="Unknown Artist">
+			<button id="set-user-name">Submit</button>
+		</div>
+	</div>
+
+
+	
+
 
 <!--Load socket.io-->
 <!--Socket needs to be loaded above canvas -->
+
+
+
+
 <script src="/socket.io/socket.io.js"></script>
 
-<script src="js/canvas.js"></script>
+<script src="js/canvas.js"></script> 
 
 </body>
 </html>
