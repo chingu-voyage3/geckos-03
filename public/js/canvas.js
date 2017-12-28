@@ -265,6 +265,12 @@ function appendMessage(msg, name) {
 	chat.innerHTML += chatHTML(msg, name);
 }
 
+function loadCanvas(drawing) {
+
+	console.log(typeof(drawing));
+
+}
+
 /*
  * socket.io part
  */
@@ -279,6 +285,10 @@ socket.on('update users', userList =>{
 
 socket.on('msg', (msg, name) => {
 	appendMessage(msg, name);
+})
+
+socket.on('load canvas', drawing =>{
+	loadCanvas(drawing);
 })
 
 /*
