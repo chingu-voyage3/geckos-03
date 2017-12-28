@@ -22,6 +22,7 @@
   "homepage": "https://github.com/chingu-voyage3/geckos-03#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "redis": "^2.8.0",
     "socket.io": "^2.0.4"
   }
 }
