@@ -241,15 +241,9 @@ function refreshUserList(list){
 
 function appendMessage(msg, name) {
 
-	const MAX_MESSAGES = 13;
 	const chat = document.querySelector('#chat-area');
-
-	//Removed Limit because the chat does not break once too many messages are sent anymore
-	if(chat.childElementCount >= MAX_MESSAGES){
-		// chat.removeChild(chat.firstElementChild);
-	}
-
 	chat.innerHTML += chatHTML(msg, name);
+	
 }
 
 /*
